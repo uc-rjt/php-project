@@ -99,11 +99,6 @@
 
         $.getJSON('question.json', function (data) {
 
-
-
-
-
-
             let correct_answers = JSON.parse(sessionStorage.getItem('correct_answers'));
             let user_answers = JSON.parse(sessionStorage.getItem('user_answers'));
             let filtered_user_answers = user_answers.filter(Boolean);
@@ -133,7 +128,7 @@
 
             // display correct
             $('.displayCorrect').text(correct);
-
+            // display incorrect
             $('.displayIncorrect').text(incorrect);
 
 
@@ -153,6 +148,7 @@
             let roundOffPercentage = Math.round(percentage * 100) / 100
 
 
+            // display result
             $('.displayResult').text(roundOffPercentage + '%');
 
 
@@ -187,14 +183,7 @@
 
                 for (let j = 0; j < questionAnswers.answers.length; j++) {
                     if (questionAnswers.answers[j].is_correct == 1) {
-
-
-
-
-
                         $(`#option_${i}_${j + 1}`).addClass('text-success');
-
-
 
                     } else if (questionAnswers.answers[j].is_correct != 1 && questionAnswers.answers[j].id == user_answers[i]) {
                         $(`#option_${i}_${j + 1}`).addClass('text-danger');

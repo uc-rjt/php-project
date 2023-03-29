@@ -442,8 +442,6 @@
 
             // change color of 1st side que
             addSideListHighlight('#sideQue1');
-            // $('#sideQue1').toggleClass('text-primary');
-            // $('#sideQue1').removeClass('text-dark');
 
 
             let listItem = $('a');
@@ -570,6 +568,7 @@
                 $('.displayUnattempted').text(data.length - attempted);
 
                 // storing correct_answers in session storage 
+                sessionStorage.setItem('user_answers', JSON.stringify(user_answers));
                 sessionStorage.setItem('correct_answers', JSON.stringify(correct_answers));
 
 
