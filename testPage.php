@@ -200,17 +200,17 @@
         crossorigin="anonymous"></script>
 
     <script>
-        var timer2 = "30:00";
+        let timer2 = "30:00";
 
 
 
-        var interval = setInterval(function () {
+        let interval = setInterval(function () {
 
 
-            var timer = timer2.split(':');
+            let timer = timer2.split(':');
             //by parsing integer, I avoid all extra string processing
-            var minutes = parseInt(timer[0], 10);
-            var seconds = parseInt(timer[1], 10);
+            let minutes = parseInt(timer[0], 10);
+            let seconds = parseInt(timer[1], 10);
             --seconds;
             minutes = (seconds < 0) ? --minutes : minutes;
             if (minutes < 0 && seconds == 00) clearInterval(interval);
@@ -232,7 +232,7 @@
         }, 1000);
 
 
-        var jsindex = 0;
+        let jsindex = 0;
 
 
 
@@ -245,7 +245,7 @@
 
 
 
-            var questionAnswers = JSON.parse(data[jsindex].content_text);
+            let questionAnswers = JSON.parse(data[jsindex].content_text);
 
             $('#displayQuestion').text(questionAnswers.question);
 
@@ -320,7 +320,7 @@
                     $('.queNo').text(jsindex + 1 <= 9 ? `0${jsindex + 1}` : jsindex + 1);
 
                     // persisting values
-                    // var prevValue = user_answers[jsindex] ? user_answers[jsindex] : (JSON.parse(sessionStorage.getItem('user_answers')))[jsindex];
+                    // let prevValue = user_answers[jsindex] ? user_answers[jsindex] : (JSON.parse(sessionStorage.getItem('user_answers')))[jsindex];
                     let userAnswer = JSON.parse(sessionStorage.getItem('user_answers')) ? JSON.parse(sessionStorage.getItem('user_answers')) : [];
                     let prevValue2 = userAnswer[jsindex];
 
@@ -393,9 +393,9 @@
                     // sideQue highlight END
 
                     // persisting values
-                    // var prevValue = user_answers[jsindex];
-                    // var prevValue = user_answers[jsindex] ? user_answers[jsindex] : (JSON.parse(sessionStorage.getItem('user_answers')))[jsindex];
-                    // var prevValue = JSON.parse(sessionStorage.getItem('user_answers'))[jsindex];
+                    // let prevValue = user_answers[jsindex];
+                    // let prevValue = user_answers[jsindex] ? user_answers[jsindex] : (JSON.parse(sessionStorage.getItem('user_answers')))[jsindex];
+                    // let prevValue = JSON.parse(sessionStorage.getItem('user_answers'))[jsindex];
 
                     let userAnswer = JSON.parse(sessionStorage.getItem('user_answers')) ? JSON.parse(sessionStorage.getItem('user_answers')) : [];
                     let prevValue2 = userAnswer[jsindex];
@@ -437,9 +437,9 @@
             });
 
             //    display side panel questions
-            var sideListItem = ``;
+            let sideListItem = ``;
 
-            for (var i = 0; i < data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
                 sideListItem += `<li class='mt-3 pb-2 border-bottom side-list-item'><a class='h6 text-dark text-decoration-none' id='sideQue${i + 1}' value='${i}'>${data[i].snippet}</a></li>`
             }
 
@@ -454,7 +454,7 @@
             $('#sideQue1').removeClass('text-dark');
 
 
-            var listItem = $('a');
+            let listItem = $('a');
 
             $('a').on('click', function (e) {
 
@@ -514,7 +514,7 @@
                 }
 
 
-                var number = jsindex;
+                let number = jsindex;
                 number++;
 
 
@@ -567,12 +567,12 @@
             // CHECKING OPTIONS START
 
             // collecting options
-            var correct_answers = [];
-            for (var i = 0; i < data.length; i++) {
+            let correct_answers = [];
+            for (let i = 0; i < data.length; i++) {
                 questionAnswers = JSON.parse(data[i].content_text);
 
 
-                for (var j = 0; j < questionAnswers.answers.length; j++) {
+                for (let j = 0; j < questionAnswers.answers.length; j++) {
                     if (questionAnswers.answers[j].is_correct == 1) {
 
 
@@ -588,11 +588,11 @@
 
 
 
-            // var user_answers = [];
-            var user_answers = JSON.parse(sessionStorage.getItem('user_answers')) ? JSON.parse(sessionStorage.getItem('user_answers')) : [];
+            // let user_answers = [];
+            let user_answers = JSON.parse(sessionStorage.getItem('user_answers')) ? JSON.parse(sessionStorage.getItem('user_answers')) : [];
 
-            var filtered_user_answers = [];
-            var attempted = 0;
+            let filtered_user_answers = [];
+            let attempted = 0;
 
             $('.answer_input').on('click', function (e) {
 
@@ -641,7 +641,7 @@
             // prev value click on reload
             // let js = 0;
             // // let prevValue1 = user_answers[js] ? user_answers[js] : (JSON.parse(sessionStorage.getItem('user_answers')))[js];
-            // var prevValue1 = JSON.parse(sessionStorage.getItem('user_answers'))[js];
+            // let prevValue1 = JSON.parse(sessionStorage.getItem('user_answers'))[js];
 
             // console.log(prevValue1);
 

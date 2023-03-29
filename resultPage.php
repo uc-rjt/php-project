@@ -93,7 +93,7 @@
     <script>
 
 
-        var jsindex = 0;
+        let jsindex = 0;
 
 
 
@@ -104,11 +104,11 @@
 
 
 
-            var correct_answers = JSON.parse(sessionStorage.getItem('correct_answers'));
-            var user_answers = JSON.parse(sessionStorage.getItem('user_answers'));
-            var filtered_user_answers = user_answers.filter(Boolean);
+            let correct_answers = JSON.parse(sessionStorage.getItem('correct_answers'));
+            let user_answers = JSON.parse(sessionStorage.getItem('user_answers'));
+            let filtered_user_answers = user_answers.filter(Boolean);
 
-            var attempted = filtered_user_answers.length;
+            let attempted = filtered_user_answers.length;
 
 
 
@@ -119,9 +119,9 @@
             $('.displayUnattempted').text(data.length - attempted);
 
             // correct answers
-            var correct = 0;
-            var incorrect = 0;
-            for (var i = 0; i < data.length; i++) {
+            let correct = 0;
+            let incorrect = 0;
+            for (let i = 0; i < data.length; i++) {
                 if (user_answers[i] && correct_answers[i] == user_answers[i]) {
                     correct++;
                 } else if (user_answers[i] && correct_answers[i] != user_answers[i]) {
@@ -146,11 +146,11 @@
             });
 
 
-            var percentage = (correct / data.length) * 100;
+            let percentage = (correct / data.length) * 100;
 
 
 
-            var roundOffPercentage = Math.round(percentage * 100) / 100
+            let roundOffPercentage = Math.round(percentage * 100) / 100
 
 
             $('.displayResult').text(roundOffPercentage + '%');
@@ -159,9 +159,9 @@
 
 
             // display table
-            var tabrow = ``;
+            let tabrow = ``;
 
-            for (var i = 0; i < data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
 
                 tabrow += `<tr><td>${(i + 1) <= 9 ? `0${i + 1}` : i + 1}</td><td><a href='reviewPage.php?que_index=${i}' class='text-dark text-decoration-none'>${data[i].snippet}</a></td><td class='text-center'>
     <span class='h6' id='option_${i}_1'>A</span> <span class='h6' id='option_${i}_2'>B </span> <span class='h6' id='option_${i}_3'>C </span> <span class='h6' id='option_${i}_4'>D </span </td><td>${user_answers[i] ? (user_answers[i] == correct_answers[i] ? 'Correct' : 'Incorrect') : 'Not attempted'

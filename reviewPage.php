@@ -179,14 +179,14 @@
 
     <script>
 
-        var jsindex = 0;
+        let jsindex = 0;
 
 
         $.getJSON('question.json', function (data) {
 
-            var queries = {};
+            let queries = {};
             $.each(document.location.search.substr(1).split('&'), function (c, q) {
-                var i = q.split('=');
+                let i = q.split('=');
                 queries[i[0].toString()] = i[1].toString();
             });
 
@@ -209,13 +209,13 @@
 
 
 
-            var questionAnswers = JSON.parse(data[jsindex].content_text);
+            let questionAnswers = JSON.parse(data[jsindex].content_text);
 
 
 
             // display question status
-            var user_answers = JSON.parse(sessionStorage.getItem('user_answers'));
-            var correct_answers = JSON.parse(sessionStorage.getItem('correct_answers'));
+            let user_answers = JSON.parse(sessionStorage.getItem('user_answers'));
+            let correct_answers = JSON.parse(sessionStorage.getItem('correct_answers'));
 
 
 
@@ -261,8 +261,8 @@
                 $(`#option_${i + 1}`).val(questionAnswers.answers[i].id);
             }
 
-            var prevValue = user_answers[jsindex];
-            var correctValue = correct_answers[jsindex];
+            let prevValue = user_answers[jsindex];
+            let correctValue = correct_answers[jsindex];
 
 
 
@@ -344,9 +344,9 @@
                 $('#local-navbar').toggleClass('show');
             });
 
-            var sideListItem = ``;
+            let sideListItem = ``;
 
-            for (var i = 0; i < data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
                 sideListItem += `<li class='mt-3 pb-2 border-bottom side-list-item'><a tabindex='-1' class='h6 text-dark text-decoration-none' id='sideQue${i + 1}' href="reviewPage.php?que_index=${i}" value='${i}'>${data[i].snippet}</a></li>`
             }
 
