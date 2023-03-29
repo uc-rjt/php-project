@@ -219,7 +219,7 @@
             let correct_answers = JSON.parse(sessionStorage.getItem('correct_answers'));
 
 
-
+            // display alert
             if (user_answers[jsindex] && user_answers[jsindex] == correct_answers[jsindex]) {
                 $('#que_status').text('Correct').addClass('alert-success');
             } else if (!user_answers[jsindex]) {
@@ -268,11 +268,6 @@
 
 
             for (let i = 0; i < questionAnswers.answers.length; i++) {
-
-
-
-
-
 
                 // put green color to correct_answers
                 if ($('.form-check-input')[i].value == correctValue) {
