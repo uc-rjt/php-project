@@ -234,23 +234,96 @@
 
         let jsindex = 0;
 
-
-
-
-
-
         $.getJSON('question.json', function (data) {
 
-
-
-
+            // fetch questionAnswers
 
             let questionAnswers = JSON.parse(data[jsindex].content_text);
 
-            $('#displayQuestion').text(questionAnswers.question);
+            function questionAnswer() {
+                questionAnswers = JSON.parse(data[jsindex].content_text);
+
+                console.log('questionAnswers index: ', jsindex)
+                // questionAnswers = JSON.parse(data[jsindex].content_text);
+            }
+            // questionAnswer();
+
+
+            function displayOption() {
+                for (let i = 0; i < questionAnswers.answers.length; i++) {
+                    $(`#displayOption${i + 1}`).html(questionAnswers.answers[i].answer);
+                    $(`#displayOption${i + 1}`).attr('value', questionAnswers.answers[i].id);
+                    $(`#option_${i + 1}`).val(questionAnswers.answers[i].id);
+                }
+            }
+
+            function displayQuestion() {
+                $('#displayQuestion').text(questionAnswers.question);
+            }
+
+            function removeSideListHighlight() {
+                for (let i = 0; i < data.length; i++) {
+                    $(`#sideQue${i + 1}`).removeClass('text-primary');
+                    $(`#sideQue${i + 1}`).addClass('text-dark');
+                }
+            }
+
+            function addSideListHighlight(sideListSelector) {
+                console.log('sideListSelector:', sideListSelector);
+                $(sideListSelector).addClass('text-primary');
+                $(sideListSelector).removeClass('text-dark');
+                // $(`#sideQue${jsindex + 1}`).addClass('text-primary');
+                // $(`#sideQue${jsindex + 1}`).removeClass('text-dark');
+            }
+
+            function persistUserOptions() {
+                let userAnswer = JSON.parse(sessionStorage.getItem('user_answers')) ? JSON.parse(sessionStorage.getItem('user_answers')) : [];
+                let prevValue = userAnswer[jsindex];
+
+                console.log('jsindex:', jsindex)
+
+                console.log('prevValue: ', prevValue);
+
+
+                for (let i = 0; i < questionAnswers.answers.length; i++) {
+
+
+                    if ($('.form-check-input')[i].value == prevValue) {
+
+                        $('.form-check-input')[i].click();
+                        // $('.form-check-input')[i].prop('checked', true);
+                    }
+
+                }
+            }
+
+            function displayQueNo() {
+                $('.queNo').text(jsindex + 1 <= 9 ? `0${jsindex + 1}` : jsindex + 1);
+            }
+
+            function disableEnableButton() {
+                console.log('disableEnableButton jsindex is:', jsindex);
+                if (jsindex == 0) {
+                    $('#prev').prop('disabled', true)
+                    $('#next').prop('disabled', false)
+                    console.log('jsindex is 0')
+
+                } else if (jsindex == data.length - 1) {
+                    $('#next').prop('disabled', true)
+                    $('#prev').prop('disabled', false)
+                    console.log(`jsindex is ${data.length - 1}`)
+
+                } else {
+                    $('#prev').prop('disabled', false)
+                    $('#next').prop('disabled', false)
+                }
+            }
+
+            // display question 1
+            displayQuestion();
+            // $('#displayQuestion').text(questionAnswers.question);
 
             // display totalQue
-
             $('.totalQue').text(data.length <= 9 ? `0${data.length}` : data.length);
 
             // make options dynamically START
@@ -262,7 +335,6 @@
         </label>
         </div>
         `;
-
             }
 
             $('.options').append(optionsHtml);
@@ -270,16 +342,20 @@
             // make options dynamically END
 
 
-            for (let i = 0; i < questionAnswers.answers.length; i++) {
-                $(`#displayOption${i + 1}`).html(questionAnswers.answers[i].answer);
-                $(`#displayOption${i + 1}`).attr('value', questionAnswers.answers[i].id);
-                $(`#option_${i + 1}`).val(questionAnswers.answers[i].id);
-            }
+            // display options for que 1
+            displayOption();
+            // for (let i = 0; i < questionAnswers.answers.length; i++) {
+            //     $(`#displayOption${i + 1}`).html(questionAnswers.answers[i].answer);
+            //     $(`#displayOption${i + 1}`).attr('value', questionAnswers.answers[i].id);
+            //     $(`#option_${i + 1}`).val(questionAnswers.answers[i].id);
+            // }
 
 
 
-
-            $('#prev').prop('disabled', true)
+            // disable prev button on 1st page
+            // disableEnable next/prev button
+            disableEnableButton();
+            // $('#prev').prop('disabled', true)
 
 
 
@@ -290,71 +366,84 @@
 
                     $('.form-check-input').prop('checked', false);
 
+                    // fetch questionAnswers
+                    questionAnswer();
+                    // questionAnswers = JSON.parse(data[jsindex].content_text);
 
-                    questionAnswers = JSON.parse(data[jsindex].content_text);
+                    displayQuestion();
+                    // $('#displayQuestion').text(questionAnswers.question);
 
+                    // display options when click on next
+                    displayOption();
 
-                    $('#displayQuestion').text(questionAnswers.question);
+                    // for (let i = 0; i < questionAnswers.answers.length; i++) {
+                    //     $(`#displayOption${i + 1}`).html(questionAnswers.answers[i].answer);
+                    //     $(`#displayOption${i + 1}`).attr('value', questionAnswers.answers[i].id);
 
-                    for (let i = 0; i < questionAnswers.answers.length; i++) {
-                        $(`#displayOption${i + 1}`).html(questionAnswers.answers[i].answer);
-                        $(`#displayOption${i + 1}`).attr('value', questionAnswers.answers[i].id);
+                    //     $(`#option_${i + 1}`).val(questionAnswers.answers[i].id);
 
-                        $(`#option_${i + 1}`).val(questionAnswers.answers[i].id);
-
-                    }
+                    // }
 
                     // sideQue highlight START
 
-                    for (let i = 0; i < data.length; i++) {
-                        $(`#sideQue${i + 1}`).removeClass('text-primary');
-                        $(`#sideQue${i + 1}`).addClass('text-dark');
-                    }
+                    // remove highlighting from all sideListItems when clicked on next
+                    removeSideListHighlight();
+                    // for (let i = 0; i < data.length; i++) {
+                    //     $(`#sideQue${i + 1}`).removeClass('text-primary');
+                    //     $(`#sideQue${i + 1}`).addClass('text-dark');
+                    // }
 
-                    $(`#sideQue${jsindex + 1}`).addClass('text-primary');
-                    $(`#sideQue${jsindex + 1}`).removeClass('text-dark');
+                    // add highlighting
+
+                    addSideListHighlight(`#sideQue${jsindex + 1}`);
+                    // $(`#sideQue${jsindex + 1}`).addClass('text-primary');
+                    // $(`#sideQue${jsindex + 1}`).removeClass('text-dark');
                     // sideQue highlight END
 
-
-
-                    $('.queNo').text(jsindex + 1 <= 9 ? `0${jsindex + 1}` : jsindex + 1);
+                    // display queNo.
+                    displayQueNo();
+                    // $('.queNo').text(jsindex + 1 <= 9 ? `0${jsindex + 1}` : jsindex + 1);
 
                     // persisting values
+                    persistUserOptions();
                     // let prevValue = user_answers[jsindex] ? user_answers[jsindex] : (JSON.parse(sessionStorage.getItem('user_answers')))[jsindex];
-                    let userAnswer = JSON.parse(sessionStorage.getItem('user_answers')) ? JSON.parse(sessionStorage.getItem('user_answers')) : [];
-                    let prevValue2 = userAnswer[jsindex];
+                    // let userAnswer = JSON.parse(sessionStorage.getItem('user_answers')) ? JSON.parse(sessionStorage.getItem('user_answers')) : [];
+                    // let prevValue2 = userAnswer[jsindex];
 
                     // console.log('prevValue2: ', prevValue2);
 
 
-                    for (let i = 0; i < questionAnswers.answers.length; i++) {
+                    // for (let i = 0; i < questionAnswers.answers.length; i++) {
 
 
-                        if ($('.form-check-input')[i].value == prevValue2) {
+                    //     if ($('.form-check-input')[i].value == prevValue2) {
 
-                            $('.form-check-input')[i].click();
-                            // $('.form-check-input')[i].prop('checked', true);
-                        }
+                    //         $('.form-check-input')[i].click();
+                    //         // $('.form-check-input')[i].prop('checked', true);
+                    //     }
 
-                    }
+                    // }
 
+                    // enable prev button when clicked on next
+                    // disableEnable next/prev button
+                    disableEnableButton();
+                    // $('#prev').prop('disabled', false);
 
-                    $('#prev').prop('disabled', false);
+                    // if (jsindex == 0) {
+                    //     $('#prev').prop('disabled', true)
 
-                    if (jsindex == 0) {
-                        $('#prev').prop('disabled', true)
-
-                    } else if (jsindex == data.length - 1) {
-                        $('#next').prop('disabled', true)
-                    }
+                    // } else if (jsindex == data.length - 1) {
+                    //     $('#next').prop('disabled', true)
+                    // }
 
 
                 } else if (jsindex == data.length - 1) {
 
                     $('#next').prop('disabled', true);
 
-
-                    $('.queNo').text(jsindex + 1 <= 9 ? `0${jsindex + 1}` : jsindex + 1);
+                    // display queNo.
+                    displayQueNo();
+                    // $('.queNo').text(jsindex + 1 <= 9 ? `0${jsindex + 1}` : jsindex + 1);
 
 
                 }
@@ -367,68 +456,79 @@
 
                     $('.form-check-input').prop('checked', false);
 
-                    questionAnswers = JSON.parse(data[jsindex].content_text);
+                    // fetch questionAnswers
+                    questionAnswer();
+                    // questionAnswers = JSON.parse(data[jsindex].content_text);
 
-                    $('#displayQuestion').text(questionAnswers.question);
+                    displayQuestion();
+                    // $('#displayQuestion').text(questionAnswers.question);
 
 
+                    // display options when clicked on prev button
+                    displayOption();
+                    // for (let i = 0; i < questionAnswers.answers.length; i++) {
+                    //     $(`#displayOption${i + 1}`).html(questionAnswers.answers[i].answer);
+                    //     $(`#displayOption${i + 1}`).attr('value', questionAnswers.answers[i].id);
+                    //     $(`#option_${i + 1}`).val(questionAnswers.answers[i].id);
 
-                    for (let i = 0; i < questionAnswers.answers.length; i++) {
-                        $(`#displayOption${i + 1}`).html(questionAnswers.answers[i].answer);
-                        $(`#displayOption${i + 1}`).attr('value', questionAnswers.answers[i].id);
-
-                        $(`#option_${i + 1}`).val(questionAnswers.answers[i].id);
-
-                    }
+                    // }
 
                     // sideQue highlight START
 
-                    for (let i = 0; i < data.length; i++) {
-                        $(`#sideQue${i + 1}`).removeClass('text-primary');
-                        $(`#sideQue${i + 1}`).addClass('text-dark');
-                    }
-
-                    $(`#sideQue${jsindex + 1}`).addClass('text-primary');
-                    $(`#sideQue${jsindex + 1}`).removeClass('text-dark');
+                    // remove highlighting from all sideListItems when clicked on prev button
+                    removeSideListHighlight();
+                    // for (let i = 0; i < data.length; i++) {
+                    //     $(`#sideQue${i + 1}`).removeClass('text-primary');
+                    //     $(`#sideQue${i + 1}`).addClass('text-dark');
+                    // }
+                    // add highlight when clicked on prev
+                    addSideListHighlight(`#sideQue${jsindex + 1}`);
+                    // $(`#sideQue${jsindex + 1}`).addClass('text-primary');
+                    // $(`#sideQue${jsindex + 1}`).removeClass('text-dark');
                     // sideQue highlight END
 
                     // persisting values
                     // let prevValue = user_answers[jsindex];
                     // let prevValue = user_answers[jsindex] ? user_answers[jsindex] : (JSON.parse(sessionStorage.getItem('user_answers')))[jsindex];
                     // let prevValue = JSON.parse(sessionStorage.getItem('user_answers'))[jsindex];
-
-                    let userAnswer = JSON.parse(sessionStorage.getItem('user_answers')) ? JSON.parse(sessionStorage.getItem('user_answers')) : [];
-                    let prevValue2 = userAnswer[jsindex];
-
-
-
-                    for (let i = 0; i < questionAnswers.answers.length; i++) {
+                    persistUserOptions();
+                    // let userAnswer = JSON.parse(sessionStorage.getItem('user_answers')) ? JSON.parse(sessionStorage.getItem('user_answers')) : [];
+                    // let prevValue2 = userAnswer[jsindex];
 
 
-                        if ($('.form-check-input')[i].value == prevValue2) {
 
-                            $('.form-check-input')[i].click();
-                        }
-
-                    }
+                    // for (let i = 0; i < questionAnswers.answers.length; i++) {
 
 
-                    $('.queNo').text(jsindex + 1 <= 9 ? `0${jsindex + 1}` : jsindex + 1);
+                    //     if ($('.form-check-input')[i].value == prevValue2) {
+
+                    //         $('.form-check-input')[i].click();
+                    //     }
+
+                    // }
+
+                    // display queNo.
+                    displayQueNo();
+                    // $('.queNo').text(jsindex + 1 <= 9 ? `0${jsindex + 1}` : jsindex + 1);
+
+                    // disableEnable next/prev button
+                    disableEnableButton();
+
+                    // $('#next').prop('disabled', false);
+
+                    // if (jsindex == 0) {
+                    //     $('#prev').prop('disabled', true)
+                    // } else if (jsindex == data.length - 1) {
+                    //     $('#next').prop('disabled', true)
+                    // }
 
 
-                    $('#next').prop('disabled', false);
-
-                    if (jsindex == 0) {
-                        $('#prev').prop('disabled', true)
-                    } else if (jsindex == data.length - 1) {
-                        $('#next').prop('disabled', true)
-                    }
-
-
-                } else {
-
-                    $('#prev').prop('disabled', true);
                 }
+
+                // else {
+
+                //     $('#prev').prop('disabled', true);
+                // }
             });
 
             // side panel
@@ -449,7 +549,7 @@
 
 
 
-            // change color of selected side que
+            // change color of 1st side que
             $('#sideQue1').toggleClass('text-primary');
             $('#sideQue1').removeClass('text-dark');
 
@@ -469,71 +569,83 @@
 
 
 
-                jsindex = $(e.target).attr('value');
-                questionAnswers = JSON.parse(data[jsindex].content_text);
+                jsindex = (Number)($(e.target).attr('value'));
+
+                // fetch questionAnswers
+                questionAnswer();
+                // questionAnswers = JSON.parse(data[jsindex].content_text);
 
                 // sideQue highlight START
+                // remove highlighting from all sideListItems when clicked on sideListItem
+                removeSideListHighlight();
+                // for (let i = 0; i < data.length; i++) {
+                //     $(`#sideQue${i + 1}`).removeClass('text-primary');
+                //     $(`#sideQue${i + 1}`).addClass('text-dark');
+                // }
 
-                for (let i = 0; i < data.length; i++) {
-                    $(`#sideQue${i + 1}`).removeClass('text-primary');
-                    $(`#sideQue${i + 1}`).addClass('text-dark');
-                }
+                // add highlight to clicked sideListItem
 
-                $(e.target).addClass('text-primary');
-                $(e.target).removeClass('text-dark');
+                addSideListHighlight(e.target);
+                // $(e.target).addClass('text-primary');
+                // $(e.target).removeClass('text-dark');
                 // sideQue highlight END
 
-                $('#displayQuestion').text(questionAnswers.question);
+                displayQuestion();
+                // $('#displayQuestion').text(questionAnswers.question);
 
-                for (let i = 0; i < questionAnswers.answers.length; i++) {
-                    $(`#displayOption${i + 1}`).html(questionAnswers.answers[i].answer);
-                    $(`#displayOption${i + 1}`).attr('value', questionAnswers.answers[i].id);
-                    $(`#option_${i + 1}`).val(questionAnswers.answers[i].id);
-                }
+
+                // display option when clicked on sideListItem
+                displayOption();
+                // for (let i = 0; i < questionAnswers.answers.length; i++) {
+                //     $(`#displayOption${i + 1}`).html(questionAnswers.answers[i].answer);
+                //     $(`#displayOption${i + 1}`).attr('value', questionAnswers.answers[i].id);
+                //     $(`#option_${i + 1}`).val(questionAnswers.answers[i].id);
+                // }
 
                 // persisting values
 
                 // let user_option = user_answers[jsindex];
 
+                persistUserOptions();
+                // let userAnswer = JSON.parse(sessionStorage.getItem('user_answers')) ? JSON.parse(sessionStorage.getItem('user_answers')) : [];
+                // let user_option = userAnswer[jsindex];
 
 
-                let userAnswer = JSON.parse(sessionStorage.getItem('user_answers')) ? JSON.parse(sessionStorage.getItem('user_answers')) : [];
-                let user_option = userAnswer[jsindex];
-
-
-                for (let i = 0; i < questionAnswers.answers.length; i++) {
-
-
-
-
-                    if ($('.form-check-input')[i].value == user_option) {
-
-                        $('.form-check-input')[i].click();
-
-                    }
-                }
-
-
-                let number = jsindex;
-                number++;
+                // for (let i = 0; i < questionAnswers.answers.length; i++) {
 
 
 
-                $('.queNo').text(number <= 9 ? `0${number}` : number);
+
+                //     if ($('.form-check-input')[i].value == user_option) {
+
+                //         $('.form-check-input')[i].click();
+
+                //     }
+                // }
 
 
-                if (jsindex == 0) {
-                    $('#prev').prop('disabled', true)
-                    $('#next').prop('disabled', false)
+                // let number = jsindex;
+                // number++;
 
-                } else if (jsindex == 10) {
-                    $('#next').prop('disabled', true)
-                    $('#prev').prop('disabled', false)
 
-                } else {
-                    $('#prev').prop('disabled', false)
-                    $('#next').prop('disabled', false)
-                }
+                // display queNo.
+                displayQueNo();
+                // $('.queNo').text(number <= 9 ? `0${number}` : number);
+
+                // disableEnable prev/next button
+                disableEnableButton();
+                // if (jsindex == 0) {
+                //     $('#prev').prop('disabled', true)
+                //     $('#next').prop('disabled', false)
+
+                // } else if (jsindex == 10) {
+                //     $('#next').prop('disabled', true)
+                //     $('#prev').prop('disabled', false)
+
+                // } else {
+                //     $('#prev').prop('disabled', false)
+                //     $('#next').prop('disabled', false)
+                // }
 
             })
 
@@ -645,22 +757,27 @@
 
             // console.log(prevValue1);
 
-            let userAnswer1 = JSON.parse(sessionStorage.getItem('user_answers')) ? JSON.parse(sessionStorage.getItem('user_answers')) : [];
-            let prevValue2 = userAnswer1[0];
+            // persist user_option for que 1
+            persistUserOptions();
 
 
-            for (let i = 0; i < questionAnswers.answers.length; i++) {
+
+            // let userAnswer1 = JSON.parse(sessionStorage.getItem('user_answers')) ? JSON.parse(sessionStorage.getItem('user_answers')) : [];
+            // let prevValue2 = userAnswer1[0];
 
 
-                if ($('.form-check-input')[i].value == prevValue2) {
-
-                    $('.form-check-input')[i].click();
-
-                    // console.log($('.form-check-input')[i]);
-                }
+            // for (let i = 0; i < questionAnswers.answers.length; i++) {
 
 
-            }
+            //     if ($('.form-check-input')[i].value == prevValue2) {
+
+            //         $('.form-check-input')[i].click();
+
+            //         // console.log($('.form-check-input')[i]);
+            //     }
+
+
+            // }
 
 
 
