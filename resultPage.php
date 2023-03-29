@@ -13,7 +13,7 @@
     <div class='p-2'>
         <div class='row w-100'>
             <div class='col-2'>
-                <a href='index.php'><img class='clearSession'
+                <a href='index.php' tabindex="-1"><img class='clearSession'
                         src='https://www.ucertify.com/layout/themes/bootstrap4/images/logo/ucertify_logo.png'></a>
             </div>
 

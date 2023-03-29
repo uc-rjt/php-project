@@ -81,7 +81,7 @@
     <div class='p-2'>
         <div class='row w-100'>
             <div class='col-2'>
-                <a href='index.php'><img id='reset'
+                <a href='index.php' tabindex='-1'><img id='reset'
                         src='https://www.ucertify.com/layout/themes/bootstrap4/images/logo/ucertify_logo.png'></a>
             </div>
 
@@ -121,13 +121,13 @@
         <div class="d-flex justify-content-end fixed-bottom bg-light py-3 border-top border-dark">
 
             <div class='mr-5'>
-                <button class='countdown px-4 mx-2 border-0 bg-transparent'><span id='timer'
+                <button tabindex="-1" class='countdown px-4 mx-2 border-0 bg-transparent'><span id='timer'
                         class='js-timeout'>30:00</span></button>
 
                 <button id='slide-button' class='px-4 mx-2 py-2 btn btn-success slide-button'>List</button>
                 <button id='prev' class='px-4 mx-2 py-2 btn btn-outline-primary'>Previous</button>
 
-                <button class='border-0 bg-transparent'><span class='queNo'>01</span> of <span
+                <button tabindex="-1" class='border-0 bg-transparent'><span class='queNo'>01</span> of <span
                         class='totalQue'>11</span></button>
 
                 <button id='next' class='px-4 mx-2 py-2 btn btn-outline-primary'>Next</button>

@@ -76,7 +76,7 @@
     <div class='p-2'>
         <div class='row w-100'>
             <div class='col-2'>
-                <a href='index.php'><img class='clearSession'
+                <a href='index.php' tabindex="-1"><img class='clearSession'
                         src='https://www.ucertify.com/layout/themes/bootstrap4/images/logo/ucertify_logo.png'></a>
             </div>
 
@@ -125,12 +125,12 @@
 
                         <div class='mr-5'>
                             <button id='slide-button' class='px-4 mx-2 py-2 btn btn-success slide-button'>List</button>
-                            <a id='prev' class='px-4 mx-2 py-2 btn btn-outline-primary'>Previous</a>
+                            <a id='prev' class='px-4 mx-2 py-2 btn btn-outline-primary' href="#">Previous</a>
 
-                            <button class='border-0 bg-transparent'><span class='queNo'>01</span> of <span
+                            <button tabindex="-1" class='border-0 bg-transparent'><span class='queNo'>01</span> of <span
                                     class='totalQue'>11</span></button>
 
-                            <a id='next' class='px-4 mx-2 py-2 btn btn-outline-primary'>Next</a>
+                            <a id='next' class='px-4 mx-2 py-2 btn btn-outline-primary' href="#">Next</a>
                             <a id='results' class='px-4 mx-2 py-2 btn btn-danger' href='resultPage.php'>Results</a>
                             <a class='clearSession px-4 mx-2 py-2 btn btn-warning text-white' href='index.php'>Go
                                 Back</a>
@@ -240,7 +240,7 @@
             for (let i = 0; i < questionAnswers.answers.length; i++) {
                 optionsHtml += `<div class="form-check">
         <label class="form-check-label">
-            <input id='option_${i + 1}' type="radio" class="form-check-input" name="optradio"><span class='answer_input' id='displayOption${i + 1}'>Option ${i + 1}</span>
+            <input tabindex="-1" id='option_${i + 1}' type="radio" class="form-check-input" name="optradio"><span class='answer_input' id='displayOption${i + 1}'>Option ${i + 1}</span>
         </label>
         </div>
         `;
@@ -347,7 +347,7 @@
             var sideListItem = ``;
 
             for (var i = 0; i < data.length; i++) {
-                sideListItem += `<li class='mt-3 pb-2 border-bottom side-list-item'><a class='h6 text-dark text-decoration-none' id='sideQue${i + 1}' href="reviewPage.php?que_index=${i}" value='${i}'>${data[i].snippet}</a></li>`
+                sideListItem += `<li class='mt-3 pb-2 border-bottom side-list-item'><a tabindex='-1' class='h6 text-dark text-decoration-none' id='sideQue${i + 1}' href="reviewPage.php?que_index=${i}" value='${i}'>${data[i].snippet}</a></li>`
             }
 
             $('ol').html(sideListItem);
