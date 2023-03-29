@@ -265,7 +265,6 @@
             }
 
             function addSideListHighlight(sideListSelector) {
-                console.log('sideListSelector:', sideListSelector);
                 $(sideListSelector).addClass('text-primary');
                 $(sideListSelector).removeClass('text-dark');
             }
@@ -273,11 +272,6 @@
             function persistUserOptions() {
                 let userAnswer = JSON.parse(sessionStorage.getItem('user_answers')) ? JSON.parse(sessionStorage.getItem('user_answers')) : [];
                 let prevValue = userAnswer[jsindex];
-
-                console.log('jsindex:', jsindex)
-
-                console.log('prevValue: ', prevValue);
-
 
                 for (let i = 0; i < questionAnswers.answers.length; i++) {
 
@@ -295,16 +289,13 @@
             }
 
             function disableEnableButton() {
-                console.log('disableEnableButton jsindex is:', jsindex);
                 if (jsindex == 0) {
                     $('#prev').prop('disabled', true)
                     $('#next').prop('disabled', false)
-                    console.log('jsindex is 0')
 
                 } else if (jsindex == data.length - 1) {
                     $('#next').prop('disabled', true)
                     $('#prev').prop('disabled', false)
-                    console.log(`jsindex is ${data.length - 1}`)
 
                 } else {
                     $('#prev').prop('disabled', false)
@@ -313,7 +304,6 @@
             }
 
             function unCheckOptions() {
-                console.log('unCheckOptions called')
                 $('.form-check-input').prop('checked', false);
             }
 
@@ -451,8 +441,9 @@
 
 
             // change color of 1st side que
-            $('#sideQue1').toggleClass('text-primary');
-            $('#sideQue1').removeClass('text-dark');
+            addSideListHighlight('#sideQue1');
+            // $('#sideQue1').toggleClass('text-primary');
+            // $('#sideQue1').removeClass('text-dark');
 
 
             let listItem = $('a');
