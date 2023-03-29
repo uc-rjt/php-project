@@ -319,6 +319,11 @@
                 }
             }
 
+            function unCheckOptions() {
+                console.log('unCheckOptions called')
+                $('.form-check-input').prop('checked', false);
+            }
+
             // display question 1
             displayQuestion();
             // $('#displayQuestion').text(questionAnswers.question);
@@ -364,7 +369,9 @@
                 if (jsindex < data.length - 1) {
                     jsindex++;
 
-                    $('.form-check-input').prop('checked', false);
+                    // uncheck all options
+                    unCheckOptions();
+                    // $('.form-check-input').prop('checked', false);
 
                     // fetch questionAnswers
                     questionAnswer();
@@ -437,16 +444,18 @@
                     // }
 
 
-                } else if (jsindex == data.length - 1) {
-
-                    $('#next').prop('disabled', true);
-
-                    // display queNo.
-                    displayQueNo();
-                    // $('.queNo').text(jsindex + 1 <= 9 ? `0${jsindex + 1}` : jsindex + 1);
-
-
                 }
+
+                // else if (jsindex == data.length - 1) {
+
+                //     $('#next').prop('disabled', true);
+
+                //     // display queNo.
+                //     displayQueNo();
+                //     // $('.queNo').text(jsindex + 1 <= 9 ? `0${jsindex + 1}` : jsindex + 1);
+
+
+                // }
 
             });
 
@@ -454,7 +463,9 @@
                 if (jsindex > 0) {
                     jsindex--;
 
-                    $('.form-check-input').prop('checked', false);
+                    // uncheck all options
+                    unCheckOptions();
+                    // $('.form-check-input').prop('checked', false);
 
                     // fetch questionAnswers
                     questionAnswer();
@@ -562,8 +573,9 @@
 
 
 
-
-                $('.form-check-input').prop('checked', false);
+                // uncheck all options
+                unCheckOptions();
+                // $('.form-check-input').prop('checked', false);
 
                 $('#slide-button').click();
 
