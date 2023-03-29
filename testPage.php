@@ -237,16 +237,12 @@
         $.getJSON('question.json', function (data) {
 
             // fetch questionAnswers
-
             let questionAnswers = JSON.parse(data[jsindex].content_text);
 
             function questionAnswer() {
                 questionAnswers = JSON.parse(data[jsindex].content_text);
-
-                console.log('questionAnswers index: ', jsindex)
-                // questionAnswers = JSON.parse(data[jsindex].content_text);
             }
-            // questionAnswer();
+
 
 
             function displayOption() {
@@ -272,8 +268,6 @@
                 console.log('sideListSelector:', sideListSelector);
                 $(sideListSelector).addClass('text-primary');
                 $(sideListSelector).removeClass('text-dark');
-                // $(`#sideQue${jsindex + 1}`).addClass('text-primary');
-                // $(`#sideQue${jsindex + 1}`).removeClass('text-dark');
             }
 
             function persistUserOptions() {
@@ -291,7 +285,6 @@
                     if ($('.form-check-input')[i].value == prevValue) {
 
                         $('.form-check-input')[i].click();
-                        // $('.form-check-input')[i].prop('checked', true);
                     }
 
                 }
@@ -326,7 +319,7 @@
 
             // display question 1
             displayQuestion();
-            // $('#displayQuestion').text(questionAnswers.question);
+
 
             // display totalQue
             $('.totalQue').text(data.length <= 9 ? `0${data.length}` : data.length);
@@ -349,18 +342,14 @@
 
             // display options for que 1
             displayOption();
-            // for (let i = 0; i < questionAnswers.answers.length; i++) {
-            //     $(`#displayOption${i + 1}`).html(questionAnswers.answers[i].answer);
-            //     $(`#displayOption${i + 1}`).attr('value', questionAnswers.answers[i].id);
-            //     $(`#option_${i + 1}`).val(questionAnswers.answers[i].id);
-            // }
+
 
 
 
             // disable prev button on 1st page
-            // disableEnable next/prev button
             disableEnableButton();
-            // $('#prev').prop('disabled', true)
+
+
 
 
 
@@ -371,91 +360,38 @@
 
                     // uncheck all options
                     unCheckOptions();
-                    // $('.form-check-input').prop('checked', false);
+
 
                     // fetch questionAnswers
                     questionAnswer();
-                    // questionAnswers = JSON.parse(data[jsindex].content_text);
 
+                    // display question
                     displayQuestion();
-                    // $('#displayQuestion').text(questionAnswers.question);
+
 
                     // display options when click on next
                     displayOption();
-
-                    // for (let i = 0; i < questionAnswers.answers.length; i++) {
-                    //     $(`#displayOption${i + 1}`).html(questionAnswers.answers[i].answer);
-                    //     $(`#displayOption${i + 1}`).attr('value', questionAnswers.answers[i].id);
-
-                    //     $(`#option_${i + 1}`).val(questionAnswers.answers[i].id);
-
-                    // }
 
                     // sideQue highlight START
 
                     // remove highlighting from all sideListItems when clicked on next
                     removeSideListHighlight();
-                    // for (let i = 0; i < data.length; i++) {
-                    //     $(`#sideQue${i + 1}`).removeClass('text-primary');
-                    //     $(`#sideQue${i + 1}`).addClass('text-dark');
-                    // }
 
                     // add highlighting
-
                     addSideListHighlight(`#sideQue${jsindex + 1}`);
-                    // $(`#sideQue${jsindex + 1}`).addClass('text-primary');
-                    // $(`#sideQue${jsindex + 1}`).removeClass('text-dark');
-                    // sideQue highlight END
+
 
                     // display queNo.
                     displayQueNo();
-                    // $('.queNo').text(jsindex + 1 <= 9 ? `0${jsindex + 1}` : jsindex + 1);
+
 
                     // persisting values
                     persistUserOptions();
-                    // let prevValue = user_answers[jsindex] ? user_answers[jsindex] : (JSON.parse(sessionStorage.getItem('user_answers')))[jsindex];
-                    // let userAnswer = JSON.parse(sessionStorage.getItem('user_answers')) ? JSON.parse(sessionStorage.getItem('user_answers')) : [];
-                    // let prevValue2 = userAnswer[jsindex];
 
-                    // console.log('prevValue2: ', prevValue2);
-
-
-                    // for (let i = 0; i < questionAnswers.answers.length; i++) {
-
-
-                    //     if ($('.form-check-input')[i].value == prevValue2) {
-
-                    //         $('.form-check-input')[i].click();
-                    //         // $('.form-check-input')[i].prop('checked', true);
-                    //     }
-
-                    // }
-
-                    // enable prev button when clicked on next
                     // disableEnable next/prev button
                     disableEnableButton();
-                    // $('#prev').prop('disabled', false);
-
-                    // if (jsindex == 0) {
-                    //     $('#prev').prop('disabled', true)
-
-                    // } else if (jsindex == data.length - 1) {
-                    //     $('#next').prop('disabled', true)
-                    // }
-
 
                 }
-
-                // else if (jsindex == data.length - 1) {
-
-                //     $('#next').prop('disabled', true);
-
-                //     // display queNo.
-                //     displayQueNo();
-                //     // $('.queNo').text(jsindex + 1 <= 9 ? `0${jsindex + 1}` : jsindex + 1);
-
-
-                // }
 
             });
 
@@ -465,81 +401,35 @@
 
                     // uncheck all options
                     unCheckOptions();
-                    // $('.form-check-input').prop('checked', false);
 
                     // fetch questionAnswers
                     questionAnswer();
-                    // questionAnswers = JSON.parse(data[jsindex].content_text);
 
+                    // display question
                     displayQuestion();
-                    // $('#displayQuestion').text(questionAnswers.question);
-
 
                     // display options when clicked on prev button
                     displayOption();
-                    // for (let i = 0; i < questionAnswers.answers.length; i++) {
-                    //     $(`#displayOption${i + 1}`).html(questionAnswers.answers[i].answer);
-                    //     $(`#displayOption${i + 1}`).attr('value', questionAnswers.answers[i].id);
-                    //     $(`#option_${i + 1}`).val(questionAnswers.answers[i].id);
-
-                    // }
 
                     // sideQue highlight START
-
                     // remove highlighting from all sideListItems when clicked on prev button
                     removeSideListHighlight();
-                    // for (let i = 0; i < data.length; i++) {
-                    //     $(`#sideQue${i + 1}`).removeClass('text-primary');
-                    //     $(`#sideQue${i + 1}`).addClass('text-dark');
-                    // }
+
                     // add highlight when clicked on prev
                     addSideListHighlight(`#sideQue${jsindex + 1}`);
-                    // $(`#sideQue${jsindex + 1}`).addClass('text-primary');
-                    // $(`#sideQue${jsindex + 1}`).removeClass('text-dark');
                     // sideQue highlight END
 
-                    // persisting values
-                    // let prevValue = user_answers[jsindex];
-                    // let prevValue = user_answers[jsindex] ? user_answers[jsindex] : (JSON.parse(sessionStorage.getItem('user_answers')))[jsindex];
-                    // let prevValue = JSON.parse(sessionStorage.getItem('user_answers'))[jsindex];
+                    // persisting user option
                     persistUserOptions();
-                    // let userAnswer = JSON.parse(sessionStorage.getItem('user_answers')) ? JSON.parse(sessionStorage.getItem('user_answers')) : [];
-                    // let prevValue2 = userAnswer[jsindex];
-
-
-
-                    // for (let i = 0; i < questionAnswers.answers.length; i++) {
-
-
-                    //     if ($('.form-check-input')[i].value == prevValue2) {
-
-                    //         $('.form-check-input')[i].click();
-                    //     }
-
-                    // }
 
                     // display queNo.
                     displayQueNo();
-                    // $('.queNo').text(jsindex + 1 <= 9 ? `0${jsindex + 1}` : jsindex + 1);
+
 
                     // disableEnable next/prev button
                     disableEnableButton();
-
-                    // $('#next').prop('disabled', false);
-
-                    // if (jsindex == 0) {
-                    //     $('#prev').prop('disabled', true)
-                    // } else if (jsindex == data.length - 1) {
-                    //     $('#next').prop('disabled', true)
-                    // }
-
-
                 }
 
-                // else {
-
-                //     $('#prev').prop('disabled', true);
-                // }
             });
 
             // side panel
@@ -575,7 +465,6 @@
 
                 // uncheck all options
                 unCheckOptions();
-                // $('.form-check-input').prop('checked', false);
 
                 $('#slide-button').click();
 
@@ -585,80 +474,32 @@
 
                 // fetch questionAnswers
                 questionAnswer();
-                // questionAnswers = JSON.parse(data[jsindex].content_text);
 
                 // sideQue highlight START
                 // remove highlighting from all sideListItems when clicked on sideListItem
                 removeSideListHighlight();
-                // for (let i = 0; i < data.length; i++) {
-                //     $(`#sideQue${i + 1}`).removeClass('text-primary');
-                //     $(`#sideQue${i + 1}`).addClass('text-dark');
-                // }
+
 
                 // add highlight to clicked sideListItem
-
                 addSideListHighlight(e.target);
-                // $(e.target).addClass('text-primary');
-                // $(e.target).removeClass('text-dark');
                 // sideQue highlight END
 
+                // display question
                 displayQuestion();
-                // $('#displayQuestion').text(questionAnswers.question);
+
 
 
                 // display option when clicked on sideListItem
                 displayOption();
-                // for (let i = 0; i < questionAnswers.answers.length; i++) {
-                //     $(`#displayOption${i + 1}`).html(questionAnswers.answers[i].answer);
-                //     $(`#displayOption${i + 1}`).attr('value', questionAnswers.answers[i].id);
-                //     $(`#option_${i + 1}`).val(questionAnswers.answers[i].id);
-                // }
 
-                // persisting values
-
-                // let user_option = user_answers[jsindex];
-
+                // persist user options
                 persistUserOptions();
-                // let userAnswer = JSON.parse(sessionStorage.getItem('user_answers')) ? JSON.parse(sessionStorage.getItem('user_answers')) : [];
-                // let user_option = userAnswer[jsindex];
-
-
-                // for (let i = 0; i < questionAnswers.answers.length; i++) {
-
-
-
-
-                //     if ($('.form-check-input')[i].value == user_option) {
-
-                //         $('.form-check-input')[i].click();
-
-                //     }
-                // }
-
-
-                // let number = jsindex;
-                // number++;
-
 
                 // display queNo.
                 displayQueNo();
-                // $('.queNo').text(number <= 9 ? `0${number}` : number);
 
                 // disableEnable prev/next button
                 disableEnableButton();
-                // if (jsindex == 0) {
-                //     $('#prev').prop('disabled', true)
-                //     $('#next').prop('disabled', false)
-
-                // } else if (jsindex == 10) {
-                //     $('#next').prop('disabled', true)
-                //     $('#prev').prop('disabled', false)
-
-                // } else {
-                //     $('#prev').prop('disabled', false)
-                //     $('#next').prop('disabled', false)
-                // }
-
             })
 
 
@@ -679,13 +520,7 @@
 
                 }
             });
-
-
             // hide sideList when clicked outside END
-
-
-
-
 
 
             // CHECKING OPTIONS START
@@ -706,13 +541,6 @@
             }
 
 
-
-
-
-
-
-
-            // let user_answers = [];
             let user_answers = JSON.parse(sessionStorage.getItem('user_answers')) ? JSON.parse(sessionStorage.getItem('user_answers')) : [];
 
             let filtered_user_answers = [];
@@ -739,8 +567,6 @@
 
 
             // check options
-
-
             // CHECKING OPTIONS END
 
             // final end test link / sessionStorage
@@ -752,46 +578,15 @@
                 $('.displayAttempted').text(attempted);
                 $('.displayUnattempted').text(data.length - attempted);
 
-                // session storage 
-                sessionStorage.setItem('user_answers', JSON.stringify(user_answers));
+                // storing correct_answers in session storage 
                 sessionStorage.setItem('correct_answers', JSON.stringify(correct_answers));
 
 
 
             });
 
-
-
-            // prev value click on reload
-            // let js = 0;
-            // // let prevValue1 = user_answers[js] ? user_answers[js] : (JSON.parse(sessionStorage.getItem('user_answers')))[js];
-            // let prevValue1 = JSON.parse(sessionStorage.getItem('user_answers'))[js];
-
-            // console.log(prevValue1);
-
             // persist user_option for que 1
             persistUserOptions();
-
-
-
-            // let userAnswer1 = JSON.parse(sessionStorage.getItem('user_answers')) ? JSON.parse(sessionStorage.getItem('user_answers')) : [];
-            // let prevValue2 = userAnswer1[0];
-
-
-            // for (let i = 0; i < questionAnswers.answers.length; i++) {
-
-
-            //     if ($('.form-check-input')[i].value == prevValue2) {
-
-            //         $('.form-check-input')[i].click();
-
-            //         // console.log($('.form-check-input')[i]);
-            //     }
-
-
-            // }
-
-
 
             // session reset
             $('#reset').on('click', function () {
@@ -802,15 +597,6 @@
 
 
         });
-
-
-
-
-
-
-
-
-
 
 
     </script>
