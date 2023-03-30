@@ -145,7 +145,6 @@
 
             jsindex = Number(queries.que_index);
 
-            // console.log('jsindex',jsindex);
 
             //   disable next-prev as per jsindex
             disableEnableButton(data);
