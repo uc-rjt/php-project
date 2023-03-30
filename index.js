@@ -1,7 +1,7 @@
 // let questionAnswers = JSON.parse(data[jsindex].content_text);
 
 
-    let questionAnswers = null;
+    // let questionAnswers = null;
 // var data_1 = null;
 // data = null;
 
@@ -24,6 +24,9 @@
 
 // console.log('data2: outside', data);
 
+// function setQuestionAnswers(questionAnswers){
+//     questionAnswers = questionAnswers;
+// }
 
 function index(){
     console.log('index.js connected');
@@ -51,7 +54,7 @@ function displayOption() {
         $(`#displayOption${i + 1}`).attr('value', questionAnswers.answers[i].id);
         $(`#option_${i + 1}`).val(questionAnswers.answers[i].id);
     }
-    // console.log('questionAnswers inside displayOption: ', questionAnswers)
+    console.log('questionAnswers inside displayOption: ', questionAnswers)
 
 }
 
@@ -92,17 +95,33 @@ function displayQueNo() {
 }
 
 function disableEnableButton(data) {
+
+    
+
+    console.log('disable.js',jsindex);
     if (jsindex == 0) {
+        console.log($('#prev'));
         $('#prev').prop('disabled', true)
         $('#next').prop('disabled', false)
+        $('#prev').addClass('disabled');
+        $('#next').removeClass('disabled');
+
+        console.log($('#prev'));
+
 
     } else if (jsindex == data.length - 1) {
         $('#next').prop('disabled', true)
         $('#prev').prop('disabled', false)
+        $('#next').addClass('disabled');
+        $('#prev').removeClass('disabled');
+
 
     } else {
         $('#prev').prop('disabled', false)
         $('#next').prop('disabled', false)
+        $('#next').removeClass('disabled');
+        $('#prev').removeClass('disabled');
+
     }
 }
 
