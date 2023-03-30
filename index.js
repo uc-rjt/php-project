@@ -1,15 +1,6 @@
 
-function index(){
-    console.log('index.js connected');
-}
-
 function questionAnswer(data) {
-    console.log('data: ',data)
-    // alert(data);
      questionAnswers = JSON.parse(data[jsindex].content_text);
-    console.log('jsindex: ',jsindex);
-     console.log('questionAnswers: ',questionAnswers);
-
 }
 
 function displayOption() {
@@ -18,8 +9,6 @@ function displayOption() {
         $(`#displayOption${i + 1}`).attr('value', questionAnswers.answers[i].id);
         $(`#option_${i + 1}`).val(questionAnswers.answers[i].id);
     }
-    console.log('questionAnswers inside displayOption: ', questionAnswers)
-
 }
 
 function displayQuestion() {
@@ -59,19 +48,11 @@ function displayQueNo() {
 }
 
 function disableEnableButton(data) {
-
-    
-
-    console.log('disable.js',jsindex);
     if (jsindex == 0) {
-        console.log($('#prev'));
         $('#prev').prop('disabled', true)
         $('#next').prop('disabled', false)
         $('#prev').addClass('disabled');
         $('#next').removeClass('disabled');
-
-        console.log($('#prev'));
-
 
     } else if (jsindex == data.length - 1) {
         $('#next').prop('disabled', true)
