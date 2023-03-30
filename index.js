@@ -1,32 +1,3 @@
-// let questionAnswers = JSON.parse(data[jsindex].content_text);
-
-
-    // let questionAnswers = null;
-// var data_1 = null;
-// data = null;
-
-// console.log(data);
-
-// function setData(){
-//     data=data;
-// console.log('data inside: ',data)
-
-// }
-// console.log('data outside: ',data)
-
-// let data = null;
-
-// function setData(data){
-//     data=data;
-
-//     console.log('data2: inside', data);
-// }
-
-// console.log('data2: outside', data);
-
-// function setQuestionAnswers(questionAnswers){
-//     questionAnswers = questionAnswers;
-// }
 
 function index(){
     console.log('index.js connected');
@@ -40,13 +11,6 @@ function questionAnswer(data) {
      console.log('questionAnswers: ',questionAnswers);
 
 }
-// console.log('questionupdateAnswers: ',questionAnswers);
-
-
-// function myName( variable_pass ) {
-//      myname = "hello";
-//     console.log(variable_pass+myname);
-// }
 
 function displayOption() {
     for (let i = 0; i < questionAnswers.answers.length; i++) {
@@ -60,7 +24,7 @@ function displayOption() {
 
 function displayQuestion() {
     $('#displayQuestion').text(questionAnswers.question);
-    // console.log('questionAnswers inside displayQuestion: ', questionAnswers)
+    
 }
 
 function removeSideListHighlight(data) {
