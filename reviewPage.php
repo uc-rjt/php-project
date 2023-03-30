@@ -6,67 +6,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
-    <style>
-        seq:before {
+        <link rel="stylesheet" href="main.css">
 
-            content: attr(no);
-
-        }
-
-        .form-check {
-            pointer-events: none;
-        }
-
-        #que_status {
+        <style>
+                 #que_status {
             width: 20%;
         }
-
-        .local-navbar {
-            /* background-color: #191E38; */
-            border-radius: 0 .25rem .25rem 0;
-            display: flex;
-            flex-direction: column;
-            padding-left: 2rem;
-            padding-right: 2rem;
-            padding-top: 0rem;
-            position: absolute;
-            left: -475px;
-            transition: all .24s ease-in;
-            width: 475px;
-            font-size: 12px;
-            position: absolute;
-            overflow: scroll;
-            z-index: 99;
-            top: 0;
-            height: 90vh;
-        }
-
-        .show {
-            left: 0;
-        }
-
-        li {
-            cursor: pointer;
-        }
-
-        ol {
-            list-style-type: decimal-leading-zero;
-        }
-
-        ol>li::marker {
-            font-weight: bold;
-        }
-
-        li:last-child {
-            /* border-bottom: 2px solid red; */
-            margin-bottom: none;
-        }
-
-        #local-navbar {
-            overflow-x: hidden;
-            padding-top: none;
-        }
-    </style>
+        </style>
 
 </head>
 
