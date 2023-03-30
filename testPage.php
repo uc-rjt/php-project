@@ -97,7 +97,7 @@
 
         <!-- side panel START-->
         <div id="local-navbar" class="local-navbar card card-body bg-light">
-            <ol class='mb-0'>
+            <ol class='mb-0 sideList'>
             </ol>
         </div>
 
@@ -198,6 +198,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
         crossorigin="anonymous"></script>
+        <script src ="index.js"> </script>   
 
     <script>
         let timer2 = "30:00";
@@ -231,101 +232,118 @@
             }
         }, 1000);
 
-
+        
         let jsindex = 0;
+        let data = null;
 
         $.getJSON('question.json', function (data) {
 
+            // let questionAnswers = null;
+            // console.log(data);
+            // set data
+            // setData(data);
+
+
             // fetch questionAnswers
-            let questionAnswers = JSON.parse(data[jsindex].content_text);
+            // let questionAnswers = JSON.parse(data[jsindex].content_text);
+            // $.getScript('index.js', function(){
+            //     // your code that uses the functions from your_script.js
+            //     index();
+            
 
-            function questionAnswer() {
-                questionAnswers = JSON.parse(data[jsindex].content_text);
-            }
-
-
-
-            function displayOption() {
-                for (let i = 0; i < questionAnswers.answers.length; i++) {
-                    $(`#displayOption${i + 1}`).html(questionAnswers.answers[i].answer);
-                    $(`#displayOption${i + 1}`).attr('value', questionAnswers.answers[i].id);
-                    $(`#option_${i + 1}`).val(questionAnswers.answers[i].id);
-                }
-            }
-
-            function displayQuestion() {
-                $('#displayQuestion').text(questionAnswers.question);
-            }
-
-            function removeSideListHighlight() {
-                for (let i = 0; i < data.length; i++) {
-                    $(`#sideQue${i + 1}`).removeClass('text-primary');
-                    $(`#sideQue${i + 1}`).addClass('text-dark');
-                }
-            }
-
-            function addSideListHighlight(sideListSelector) {
-                $(sideListSelector).addClass('text-primary');
-                $(sideListSelector).removeClass('text-dark');
-            }
-
-            function persistUserOptions() {
-                let userAnswer = JSON.parse(sessionStorage.getItem('user_answers')) ? JSON.parse(sessionStorage.getItem('user_answers')) : [];
-                let prevValue = userAnswer[jsindex];
-
-                for (let i = 0; i < questionAnswers.answers.length; i++) {
+            // function questionAnswer() {
+            //     questionAnswers = JSON.parse(data[jsindex].content_text);
+            // }
 
 
-                    if ($('.form-check-input')[i].value == prevValue) {
 
-                        $('.form-check-input')[i].click();
-                    }
+            // function displayOption() {
+            //     for (let i = 0; i < questionAnswers.answers.length; i++) {
+            //         $(`#displayOption${i + 1}`).html(questionAnswers.answers[i].answer);
+            //         $(`#displayOption${i + 1}`).attr('value', questionAnswers.answers[i].id);
+            //         $(`#option_${i + 1}`).val(questionAnswers.answers[i].id);
+            //     }
+            // }
 
-                }
-            }
+            // function displayQuestion() {
+            //     $('#displayQuestion').text(questionAnswers.question);
+            // }
 
-            function displayQueNo() {
-                $('.queNo').text(jsindex + 1 <= 9 ? `0${jsindex + 1}` : jsindex + 1);
-            }
+            // function removeSideListHighlight() {
+            //     for (let i = 0; i < data.length; i++) {
+            //         $(`#sideQue${i + 1}`).removeClass('text-primary');
+            //         $(`#sideQue${i + 1}`).addClass('text-dark');
+            //     }
+            // }
 
-            function disableEnableButton() {
-                if (jsindex == 0) {
-                    $('#prev').prop('disabled', true)
-                    $('#next').prop('disabled', false)
+            // function addSideListHighlight(sideListSelector) {
+            //     $(sideListSelector).addClass('text-primary');
+            //     $(sideListSelector).removeClass('text-dark');
+            // }
 
-                } else if (jsindex == data.length - 1) {
-                    $('#next').prop('disabled', true)
-                    $('#prev').prop('disabled', false)
+            // function persistUserOptions() {
+            //     let userAnswer = JSON.parse(sessionStorage.getItem('user_answers')) ? JSON.parse(sessionStorage.getItem('user_answers')) : [];
+            //     let prevValue = userAnswer[jsindex];
 
-                } else {
-                    $('#prev').prop('disabled', false)
-                    $('#next').prop('disabled', false)
-                }
-            }
+            //     for (let i = 0; i < questionAnswers.answers.length; i++) {
 
-            function unCheckOptions() {
-                $('.form-check-input').prop('checked', false);
-            }
 
+            //         if ($('.form-check-input')[i].value == prevValue) {
+
+            //             $('.form-check-input')[i].click();
+            //         }
+
+            //     }
+            // }
+
+            // function displayQueNo() {
+            //     $('.queNo').text(jsindex + 1 <= 9 ? `0${jsindex + 1}` : jsindex + 1);
+            // }
+
+            // function disableEnableButton() {
+            //     if (jsindex == 0) {
+            //         $('#prev').prop('disabled', true)
+            //         $('#next').prop('disabled', false)
+
+            //     } else if (jsindex == data.length - 1) {
+            //         $('#next').prop('disabled', true)
+            //         $('#prev').prop('disabled', false)
+
+            //     } else {
+            //         $('#prev').prop('disabled', false)
+            //         $('#next').prop('disabled', false)
+            //     }
+            // }
+
+            // function unCheckOptions() {
+            //     $('.form-check-input').prop('checked', false);
+            // }
+
+            // fetch que answers for que 1
+            questionAnswer(data);
             // display question 1
             displayQuestion();
+
+        
 
 
             // display totalQue
             $('.totalQue').text(data.length <= 9 ? `0${data.length}` : data.length);
 
             // make options dynamically START
-            let optionsHtml = ``;
-            for (let i = 0; i < questionAnswers.answers.length; i++) {
-                optionsHtml += `<div class="form-check">
-        <label class="form-check-label">
-            <input id='option_${i + 1}' tabindex='${i + 1}' type="radio" class="form-check-input answer_input" name="optradio"><span class='answer_input' id='displayOption${i + 1}'>Option ${i + 1}</span>
-        </label>
-        </div>
-        `;
-            }
+                createOptions();
 
-            $('.options').append(optionsHtml);
+        //     let optionsHtml = ``;
+        //     for (let i = 0; i < questionAnswers.answers.length; i++) {
+        //         optionsHtml += `<div class="form-check">
+        // <label class="form-check-label">
+        //     <input id='option_${i + 1}' tabindex='${i + 1}' type="radio" class="form-check-input answer_input" name="optradio"><span class='answer_input' id='displayOption${i + 1}'>Option ${i + 1}</span>
+        // </label>
+        // </div>
+        // `;
+        //     }
+
+        //     $('.options').append(optionsHtml);
 
             // make options dynamically END
 
@@ -353,7 +371,7 @@
 
 
                     // fetch questionAnswers
-                    questionAnswer();
+                    questionAnswer(data);
 
                     // display question
                     displayQuestion();
@@ -365,7 +383,7 @@
                     // sideQue highlight START
 
                     // remove highlighting from all sideListItems when clicked on next
-                    removeSideListHighlight();
+                    removeSideListHighlight(data);
 
                     // add highlighting
                     addSideListHighlight(`#sideQue${jsindex + 1}`);
@@ -379,7 +397,7 @@
                     persistUserOptions();
 
                     // disableEnable next/prev button
-                    disableEnableButton();
+                    disableEnableButton(data);
 
                 }
 
@@ -393,7 +411,7 @@
                     unCheckOptions();
 
                     // fetch questionAnswers
-                    questionAnswer();
+                    questionAnswer(data);
 
                     // display question
                     displayQuestion();
@@ -403,7 +421,7 @@
 
                     // sideQue highlight START
                     // remove highlighting from all sideListItems when clicked on prev button
-                    removeSideListHighlight();
+                    removeSideListHighlight(data);
 
                     // add highlight when clicked on prev
                     addSideListHighlight(`#sideQue${jsindex + 1}`);
@@ -417,7 +435,7 @@
 
 
                     // disableEnable next/prev button
-                    disableEnableButton();
+                    disableEnableButton(data);
                 }
 
             });
@@ -428,14 +446,16 @@
             });
 
             //    display side panel questions
-            let sideListItem = ``;
+            displaySidePanelQue(data);
+            // let sideListItem = ``;
 
-            for (let i = 0; i < data.length; i++) {
-                sideListItem += `<li class='mt-3 pb-2 border-bottom side-list-item'><a class='h6 text-dark text-decoration-none' id='sideQue${i + 1}' value='${i}'>${data[i].snippet}</a></li>`
-            }
+            // for (let i = 0; i < data.length; i++) {
+            //     sideListItem += `<li class='mt-3 pb-2 border-bottom side-list-item'><a class='h6 text-dark text-decoration-none' id='sideQue${i + 1}' value='${i}'>${data[i].snippet}</a></li>`
+            // }
 
 
-            $('ol').html(sideListItem);
+            // $('.sideList').html(sideListItem);
+            // $('ol').html(sideListItem);
 
 
 
@@ -462,11 +482,11 @@
                 jsindex = (Number)($(e.target).attr('value'));
 
                 // fetch questionAnswers
-                questionAnswer();
+                questionAnswer(data);
 
                 // sideQue highlight START
                 // remove highlighting from all sideListItems when clicked on sideListItem
-                removeSideListHighlight();
+                removeSideListHighlight(data);
 
 
                 // add highlight to clicked sideListItem
@@ -488,7 +508,7 @@
                 displayQueNo();
 
                 // disableEnable prev/next button
-                disableEnableButton();
+                disableEnableButton(data);
             })
 
 
@@ -585,11 +605,17 @@
             });
 
 
+        
 
         });
 
+        
+
 
     </script>
+
+ 
+
 </body>
 
 </html>

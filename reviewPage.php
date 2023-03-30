@@ -102,7 +102,7 @@
 
                     <!-- side panel START-->
                     <div id="local-navbar" class="local-navbar card card-body bg-light">
-                        <ol class='mb-0'>
+                        <ol class='mb-0 sideList'>
                         </ol>
                     </div>
 
@@ -346,7 +346,8 @@
                 sideListItem += `<li class='mt-3 pb-2 border-bottom side-list-item'><a tabindex='-1' class='h6 text-dark text-decoration-none' id='sideQue${i + 1}' href="reviewPage.php?que_index=${i}" value='${i}'>${data[i].snippet}</a></li>`
             }
 
-            $('ol').html(sideListItem);
+            // $('ol').html(sideListItem);
+            $('.sideList').html(sideListItem);
 
             // sideQue highlight START
 
