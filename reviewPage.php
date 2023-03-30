@@ -149,20 +149,6 @@
 
             //   disable next-prev as per jsindex
             disableEnableButton(data);
-            // if (jsindex == 0) {
-
-            //     $('#prev').prop('disabled', true);
-            //     $('#prev').addClass('disabled');
-            // } else if (jsindex == 10) {
-
-            //     $('#next').prop('disabled', true);
-            //     $('#next').addClass('disabled');
-
-            // }
-
-
-
-
 
             let questionAnswers = JSON.parse(data[jsindex].content_text);
 
@@ -186,32 +172,15 @@
 
             // display que. no.
             displayQueNo();
-            // $('.queNo').text(jsindex + 1 <= 9 ? `0${jsindex + 1}` : jsindex + 1);
-
-
-            // set questionAnswers
-            // setQuestionAnswers(questionAnswers);
 
             // display question
              // fetch questionAnswers
              questionAnswer(data);
             displayQuestion();
-            // $('#displayQuestion').text(questionAnswers.question);
 
             // make options dynamically START
             createOptions();
-        //     let optionsHtml = ``;
-        //     for (let i = 0; i < questionAnswers.answers.length; i++) {
-        //         optionsHtml += `<div class="form-check">
-        // <label class="form-check-label">
-        //     <input tabindex="-1" id='option_${i + 1}' type="radio" class="form-check-input" name="optradio"><span class='answer_input' id='displayOption${i + 1}'>Option ${i + 1}</span>
-        // </label>
-        // </div>
-        // `;
-
-        //     }
-
-        //     $('.options').append(optionsHtml);
+       
 
 
 
@@ -221,11 +190,6 @@
             // display options
             displayOption();
 
-            // for (let i = 0; i < questionAnswers.answers.length; i++) {
-            //     $(`#displayOption${i + 1}`).html(questionAnswers.answers[i].answer);
-            //     $(`#displayOption${i + 1}`).attr('value', questionAnswers.answers[i].id);
-            //     $(`#option_${i + 1}`).val(questionAnswers.answers[i].id);
-            // }
 
             let prevValue = user_answers[jsindex];
             let correctValue = correct_answers[jsindex];
@@ -318,13 +282,9 @@
 
             // sideQue highlight START
             removeSideListHighlight(data);
-            // for (let i = 0; i < data.length; i++) {
-            //     $(`#sideQue${i + 1}`).removeClass('text-primary');
-            //     $(`#sideQue${i + 1}`).addClass('text-dark');
-            // }
+           
             addSideListHighlight(`#sideQue${jsindex + 1}`);
-            // $(`#sideQue${jsindex + 1}`).addClass('text-primary');
-            // $(`#sideQue${jsindex + 1}`).removeClass('text-dark');
+           
             // sideQue highlight END
 
             // hide sideList when clicked outside START
