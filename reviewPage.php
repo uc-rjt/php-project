@@ -12,6 +12,9 @@
                  #que_status {
             width: 20%;
         }
+        .form-check {
+            pointer-events: none;
+        }
         </style>
 
 </head>
