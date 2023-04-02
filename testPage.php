@@ -475,7 +475,7 @@
         const now = new Date();
         const options = { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute:'2-digit'};
         const testDate = now.toLocaleString('en-GB', options);
-        // console.log(testDate); // output: "02-04-23 11:30"
+        
 
         sessionStorage.setItem('testDate', testDate);
 

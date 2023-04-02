@@ -205,10 +205,10 @@
         });
 
         const testDate = sessionStorage.getItem('testDate');
-        console.log(testDate);
+        
         const formattedDate =  testDate.replace(' ', ' at ');
 
-        console.log(formattedDate);
+        
 
         $('#testDate').text(formattedDate);
 
