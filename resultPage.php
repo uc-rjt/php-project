@@ -29,7 +29,7 @@
         <h2 class='text-center border-bottom border-dark py-4'>
             Test Results
         </h2>
-
+        <center>Test taken on <span id='testDate'></span> IST</center>
         <div class='row mt-3'>
             <!-- <div class='col-12'> -->
             <div class='d-flex justify-content-center col-12'>
@@ -204,8 +204,13 @@
 
         });
 
+        const testDate = sessionStorage.getItem('testDate');
+        console.log(testDate);
+        const formattedDate =  testDate.replace(' ', ' at ');
 
+        console.log(formattedDate);
 
+        $('#testDate').text(formattedDate);
 
     </script>
 

@@ -39,6 +39,16 @@
 
         <!-- side panel START-->
         <div id="local-navbar" class="local-navbar card card-body bg-light">
+            <!-- <h1 class='badge badge-primary badge-pill w-50 mt-3 mb-0 h-50 h1'>0 Attempted</h1> -->
+            <div class='btn-group border-bottom border-light'>
+                <!-- <center>
+                <h5><span class='badge badge-primary mr-3'>0 Attempted</span></h5>
+                <h5><span class='badge badge-warning'>0 Unattempted</span></h5>
+                </center> -->
+            <button tabindex="-1" class='btn btn-success btn-sm w-25 mt-3 mr-2 rounded mb-2'><strong><span id='listAttempted'>0</span> Attempted</strong></button>
+            <button tabindex="-1" class='btn btn-danger text-white btn-sm w-25 mt-3 rounded mb-2'><strong><span id='listUnattempted'>11</span> Unattempted</strong></button>
+            
+            </div>
             <ol class='mb-0 sideList'>
             </ol>
         </div>
@@ -394,6 +404,13 @@
 
             let filtered_user_answers = [];
             let attempted = 0;
+            let listAttempted = 0;
+
+            filtered_user_answers = user_answers.filter(Boolean);
+
+            $('#listAttempted').text(filtered_user_answers.length);
+            $('#listUnattempted').text(data.length - filtered_user_answers.length);
+
 
             $('.answer_input').on('click', function (e) {
 
@@ -409,6 +426,12 @@
 
                 // setsession strorge when options are clicked
                 sessionStorage.setItem('user_answers', JSON.stringify(user_answers));
+
+                //  listAttempted = filtered_user_answers.length;
+
+                $('#listAttempted').text(attempted);
+
+                $('#listUnattempted').text(data.length - attempted);
 
 
 
@@ -449,7 +472,12 @@
 
         });
 
-        
+        const now = new Date();
+        const options = { day: '2-digit', month: '2-digit', year: '2-digit', hour: '2-digit', minute:'2-digit'};
+        const testDate = now.toLocaleString('en-GB', options);
+        // console.log(testDate); // output: "02-04-23 11:30"
+
+        sessionStorage.setItem('testDate', testDate);
 
 
     </script>
