@@ -51,6 +51,11 @@
 
                     <!-- side panel START-->
                     <div id="local-navbar" class="local-navbar card card-body bg-light">
+                    <div class='btn-group border-bottom border-light'>
+            <button tabindex="-1" class='btn btn-success btn-sm w-25 mt-3 mr-2 rounded mb-2'><strong><span id='listAttempted'>0</span> Attempted</strong></button>
+            <button tabindex="-1" class='btn btn-danger text-white btn-sm w-25 mt-3 rounded mb-2'><strong><span id='listUnattempted'>11</span> Unattempted</strong></button>
+            
+            </div>
                         <ol class='mb-0 sideList'>
                         </ol>
                     </div>
@@ -159,6 +164,11 @@
             // display question status
             let user_answers = JSON.parse(sessionStorage.getItem('user_answers'));
             let correct_answers = JSON.parse(sessionStorage.getItem('correct_answers'));
+
+            let filtered_user_answers = user_answers.filter(Boolean);
+
+            $('#listAttempted').text(filtered_user_answers.length);
+            $('#listUnattempted').text(data.length - filtered_user_answers.length);
 
 
             // display alert

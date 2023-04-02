@@ -39,12 +39,8 @@
 
         <!-- side panel START-->
         <div id="local-navbar" class="local-navbar card card-body bg-light">
-            <!-- <h1 class='badge badge-primary badge-pill w-50 mt-3 mb-0 h-50 h1'>0 Attempted</h1> -->
+            
             <div class='btn-group border-bottom border-light'>
-                <!-- <center>
-                <h5><span class='badge badge-primary mr-3'>0 Attempted</span></h5>
-                <h5><span class='badge badge-warning'>0 Unattempted</span></h5>
-                </center> -->
             <button tabindex="-1" class='btn btn-success btn-sm w-25 mt-3 mr-2 rounded mb-2'><strong><span id='listAttempted'>0</span> Attempted</strong></button>
             <button tabindex="-1" class='btn btn-danger text-white btn-sm w-25 mt-3 rounded mb-2'><strong><span id='listUnattempted'>11</span> Unattempted</strong></button>
             
