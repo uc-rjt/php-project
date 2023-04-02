@@ -404,8 +404,10 @@
 
             filtered_user_answers = user_answers.filter(Boolean);
 
-            $('#listAttempted').text(filtered_user_answers.length);
-            $('#listUnattempted').text(data.length - filtered_user_answers.length);
+            attempted = filtered_user_answers.length;
+
+            $('#listAttempted').text(attempted);
+            $('#listUnattempted').text(data.length - attempted);
 
 
             $('.answer_input').on('click', function (e) {
