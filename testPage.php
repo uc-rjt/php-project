@@ -42,7 +42,7 @@
             
             <div class='btn-group border-bottom border-light'>
             <button tabindex="-1" class='btn btn-success btn-sm w-25 mt-3 mr-2 rounded mb-2'><strong><span id='listAttempted'>0</span> Attempted</strong></button>
-            <button tabindex="-1" class='btn btn-danger text-white btn-sm w-25 mt-3 rounded mb-2'><strong><span id='listUnattempted'>11</span> Unattempted</strong></button>
+            <button tabindex="-1" class='btn btn-danger text-white btn-sm w-25 mt-3 rounded mb-2'><strong><span id='listUnattempted'>0</span> Unattempted</strong></button>
             
             </div>
             <ol class='mb-0 sideList'>
@@ -404,8 +404,10 @@
 
             filtered_user_answers = user_answers.filter(Boolean);
 
-            $('#listAttempted').text(filtered_user_answers.length);
-            $('#listUnattempted').text(data.length - filtered_user_answers.length);
+            attempted = filtered_user_answers.length;
+
+            $('#listAttempted').text(attempted);
+            $('#listUnattempted').text(data.length - attempted);
 
 
             $('.answer_input').on('click', function (e) {
